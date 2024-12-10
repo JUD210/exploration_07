@@ -1,30 +1,60 @@
-# Exploration 06 Project
+# Exploration 07 Project
 
 ## 팁 공유
 
+- 최근 Tensorflow에서는, model.save() 말고 model.export()를 해야 pb 형식 저장 가능
+- 모델 디렉터리 구조 참고용 (GPT가 추천한 방식)
+
+  ```bash
+  my_tf_project/
+    Dockerfile
+    my_model_saved/
+      1/
+        saved_model.pb
+        variables/
+          variables.index
+          variables.data-00000-of-00001
+  ```
+
+![alt text](<screenshots/Screenshot 2024-12-10 at 16.21.55.png>)
+
 ## 문제 및 해결
+
+### Use model.export
+
+- 오류 메시지
+
+  ```bash
+  ValueError: Invalid filepath extension for saving. Please add either a .keras extension for the native Keras format (recommended) or a .h5 extension. Use model.export(filepath) if you want to export a SavedModel for use with TFLite/TFServing/etc. Received: filepath=cifar10_model_saved.
+  ```
+
+- 해결법
+  - SavedModel 형식으로 저장
+    - 이전에는 model.save('cifar10_model_saved') 로 가능했지만
+    - 이제는 model.export()를 사용해서 SavedModel으로 내보내야 함.
+  - `model.export('cifar10_model_saved')`
 
 ## 코더 회고
 
 - 배운 점
-  - 이동수:
-  - 권오근:
-  - 민혁:
+  - 이동수: 모델 튜닝과 배포 과정을 처음부터 끝까지 체험해보며 전체적인 흐름을 이해할 수 있었습니다. 실제로 모델을 다듬고 활용하는 과정의 복잡성을 조금씩 익힐 수 있었습니다.
+  - 권오근: 모델구성과 학습 및 튜닝도 해보고 도커 환경에서 TFserving으로 모델을 배포하는 일련의 과정을 배워봤습니다!
+  - 민혁: MLOps 전체 프로세스를 경험해보고, docker를 활용한 이미지/컨테이너 다루는 법, TFLite를 통한 플러터 앱 내부 모델 내장 방법 등을 간단하게 살펴볼 수 있었다.
 
 - 아쉬운 점
-  - 이동수:
-  - 권오근:
-  - 민혁:
+  - 이동수: 아직 익숙하지 않은 부분이 많아 완전히 이해하지 못한 영역이 존재했습니다. 이론뿐만 아니라 실전 경험이 더 필요하다는 점을 느꼈습니다.
+  - 권오근: TFServing 설정과 Docker 경로 문제로 많은 시간을 소모했고 작동이 정상적으로 되지 않아 아쉬웠습니다ㅠ
+  - 민혁: 오랜만에 docker를 만져보니, 예전 기억이 새록새록 떠오르면서도 벌써 다 까먹어버린 게 당황스럽고 아쉬웠다. 아이펠톤을 위해 천천히 복습해나가야겠다.
 
 - 느낀 점
-  - 이동수:
-  - 권오근:
-  - 민혁:
+  - 이동수: 모델을 정리하고 배포하는 과정이 생각보다 까다롭고, 많은 시간과 노력이 요구된다는 점을 실감했습니다. 이러한 과정이 반복되며 점차 익숙해질 수 있기를 기대합니다.
+  - 권오근: 개발뿐만 아니라 서비스 관점에서 모델을 운영하는 경험은 또 다르게 느껴졌습니다.
+  - 민혁: 역시 뭐든 한 번 배우고 끝이 아니라 계속 써야 한다... 그리고 필요한 기능들은 어떻게든 다시 찾게 되어있으니, 어려우면 대충 "그렇구나" 하고 넘어가야겠다.
 
 - 어려웠던 점
-  - 이동수:
-  - 권오근:
-  - 민혁:
+  - 이동수: 환경 구축과 다양한 툴 사용이 미숙해서 작업 속도가 더뎠습니다. 새로운 기술 스택을 다루는 데 시간이 걸렸지만, 익숙해지면 더 나은 결과를 얻을 수 있을 것 같습니다.
+  - 권오근: Docker 경로 매핑, TFServing의 환경 설정, 그리고 API 호출 과정에서 디버깅이 쉽지 않았어요.
+  - 민혁: 머리로는 대충 플로우가 그려지는데 직접 구현하려면 머리 아프고 귀찮은 것들이 너무 많았다. 특히, MLOps 자체 개념에 대해서 그림은 그려지는데, 구체화가 하나도 안 되는 느낌? 그냥 미래의 내가 알아서 하겠지 뭐.
 
 ## 피어리뷰 템플릿
 
