@@ -3,8 +3,8 @@ _*
 .env
 
 # Deep Learning models
-*.h5
-*.keras
+# *.h5
+# *.keras
 
 ##################################################
 # Import gitignore patterns from Flutter project
